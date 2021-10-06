@@ -3,6 +3,10 @@
 
 #include <iostream>
 
+#include "banco.h"
+#include "contacorrente.h"
+#include "contapoupanca.h"
+
 enum MenuPrincipal {
     CriarConta = 1,
     SelecionarConta,
@@ -18,6 +22,8 @@ enum MenuConta {
     RelatorioIndividual,
     Retornar
 };
+
+enum TiposDeConta { Corrente = 1, Poupanca };
 
 /*
 Crie uma classe Menu que instancie um banco e ofereça o seguinte menu
@@ -62,6 +68,9 @@ class Menu {
     void menuConta_transferir();
     void menuConta_relatorioIndividual();
     void menuConta_retornar();
+
+   protected:
+    Banco pacbank;
 };
 
 #endif

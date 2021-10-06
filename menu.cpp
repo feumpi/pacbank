@@ -2,6 +2,7 @@
 
 Menu::Menu() {
     std::cout << "Bem-vindo ao Pacbank!" << std::endl;
+
     menuPrincipal();
 }
 
@@ -53,6 +54,38 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
 
 void Menu::menuPrincipal_criarConta() {
     std::cout << "Opção escolhida: criar conta\n";
+
+    int tipo = 0, numero;
+    double saldoInicial, taxaDeOperacao, limite;
+
+    while (tipo != TiposDeConta::Corrente && tipo != TiposDeConta::Poupanca) {
+        std::cout << "Selecione o tipo de conta a ser criada:\n";
+        std::cout << "1. Conta corrente\n";
+        std::cout << "2. Conta poupança\n";
+        std::cout << "Digite uma opção: ";
+        std::cin >> tipo;
+    }
+
+    std::cout << "Número da conta: ";
+    std::cin >> numero;
+
+    std::cout << "Saldo inicial (R$): ";
+    std::cin >> saldoInicial;
+
+    if (tipo == TiposDeConta::Poupanca) {
+        std::cout << "Taxa de operação (R$): ";
+        std::cin >> taxaDeOperacao;
+
+        ContaPoupanca conta(numero, saldoInicial, taxaDeOperacao);
+        this->pacbank.inserir(conta);
+
+    } else {
+        std::cout << "Limite (R$): ";
+        std::cin >> limite;
+
+        ContaCorrente conta(numero, saldoInicial, limite);
+        this->pacbank.inserir(conta);
+    }
 }
 
 void Menu::menuPrincipal_selecionarConta() {

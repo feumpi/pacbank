@@ -20,6 +20,8 @@ ContaBancaria.
 
 class ContaBancaria {
    public:
+    ContaBancaria(int numero, double saldo);
+
     void sacar(double valor);
     void depositar(double valor);
     void transferir(double valor, ContaBancaria conta);

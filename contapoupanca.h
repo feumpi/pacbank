@@ -15,6 +15,8 @@ pode acontecer na classe ContaCorrente.
 
 class ContaPoupanca : public ContaBancaria, public Imprimivel {
    public:
+    ContaPoupanca(int numero, double saldo, double taxaDeOperacao);
+
     void mostrarDados();
 
    protected:
