@@ -6,7 +6,7 @@ e a execute.
 */
 
 int main() {
-  Menu menu;
+    Menu menu;
 
-  return 0;
+    return 0;
 }

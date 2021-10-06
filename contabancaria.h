@@ -19,15 +19,15 @@ ContaBancaria.
 */
 
 class ContaBancaria {
- public:
-  void sacar(double valor);
-  void depositar(double valor);
-  void transferir(double valor, ContaBancaria conta);
-  virtual void mostrarDados();
+   public:
+    void sacar(double valor);
+    void depositar(double valor);
+    void transferir(double valor, ContaBancaria conta);
+    virtual void mostrarDados();
 
- protected:
-  int numero;
-  double saldo;
+   protected:
+    int numero;
+    double saldo;
 };
 
 #endif

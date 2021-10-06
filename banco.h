@@ -19,15 +19,15 @@ método consiste em executar método mostrar dados de cada conta.
 */
 
 class Banco : public Imprimivel {
- public:
-  void inserir(ContaBancaria conta);
-  void remover(ContaBancaria conta);
-  ContaBancaria* procurarConta(int numero);
+   public:
+    void inserir(ContaBancaria conta);
+    void remover(ContaBancaria conta);
+    ContaBancaria* procurarConta(int numero);
 
-  void mostrarDados();
+    void mostrarDados();
 
- protected:
-  std::vector<ContaBancaria> contas;
+   protected:
+    std::vector<ContaBancaria> contas;
 };
 
 #endif

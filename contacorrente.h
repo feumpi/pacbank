@@ -14,11 +14,11 @@ pode acontecer na classe ContaCorrente.
 */
 
 class ContaCorrente : public ContaBancaria, public Imprimivel {
- public:
-  void mostrarDados();
+   public:
+    void mostrarDados();
 
- protected:
-  double limite;
+   protected:
+    double limite;
 };
 
 #endif

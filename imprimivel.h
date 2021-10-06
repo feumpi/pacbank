@@ -8,8 +8,8 @@ Imprimivel e na implementação do método, mostre os atributos de cada conta.
 */
 
 class Imprimivel {
- public:
-  virtual void mostrarDados() = 0;
+   public:
+    virtual void mostrarDados() = 0;
 };
 
 #endif

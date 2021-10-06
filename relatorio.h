@@ -9,8 +9,8 @@ objeto Imprimível e executa o método mostrarDados do objeto.
 */
 
 class Relatorio {
- public:
-  void gerarRelatorio(Imprimivel imprimivel);
+   public:
+    void gerarRelatorio(Imprimivel imprimivel);
 };
 
 #endif

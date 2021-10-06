@@ -9,8 +9,8 @@ rodá-lo.
 */
 
 int main() {
-  std::cout << "Bem-vindo ao Pacbank!" << std::endl;
+    std::cout << "Bem-vindo ao Pacbank!" << std::endl;
 
-  Executavel executavel;
-  return 0;
+    Executavel executavel;
+    return 0;
 }

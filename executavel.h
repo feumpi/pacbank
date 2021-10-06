@@ -9,8 +9,8 @@ execute o método gerar relatório para cada conta criada.
 */
 
 class Executavel {
- public:
-  Executavel();
+   public:
+    Executavel();
 };
 
 #endif

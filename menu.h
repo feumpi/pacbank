@@ -1,6 +1,24 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <iostream>
+
+enum MenuPrincipal {
+    CriarConta = 1,
+    SelecionarConta,
+    RemoverConta,
+    RelatorioGeral,
+    Finalizar
+};
+
+enum MenuConta {
+    Depositar = 1,
+    Sacar,
+    Transferir,
+    RelatorioIndividual,
+    Retornar
+};
+
 /*
 Crie uma classe Menu que instancie um banco e ofereça o seguinte menu
 para o usuário:
@@ -29,16 +47,21 @@ mostraDados criado anteriormente.
 */
 
 class Menu {
- public:
-  void principal_criarConta();
-  void principal_selecionarConta();
-  void principal_removerConta();
-  void principal_gerarRelatorio();
+   public:
+    Menu();
+    void menuPrincipal(bool exibirOpcoes = true);
+    void menuPrincipal_criarConta();
+    void menuPrincipal_selecionarConta();
+    void menuPrincipal_removerConta();
+    void menuPrincipal_relatorioGeral();
+    void menuPrincipal_finalizar();
 
-  void conta_depositar();
-  void conta_sacar();
-  void conta_transferir();
-  void conta_gerarRelatorio();
+    void menuConta(bool exibirOpcoes = true);
+    void menuConta_depositar();
+    void menuConta_sacar();
+    void menuConta_transferir();
+    void menuConta_relatorioIndividual();
+    void menuConta_retornar();
 };
 
 #endif
