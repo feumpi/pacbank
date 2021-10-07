@@ -1,6 +1,8 @@
 #ifndef CONTA_CORRENTE_H
 #define CONTA_CORRENTE_H
 
+#include <iostream>
+
 #include "contabancaria.h"
 #include "imprimivel.h"
 

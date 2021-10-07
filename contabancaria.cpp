@@ -5,4 +5,10 @@ ContaBancaria::ContaBancaria(int numero, double saldo) {
     this->saldo = saldo;
 }
 
-void ContaBancaria::mostrarDados() {}
+int ContaBancaria::getNumero() { return this->numero; }
+
+double ContaBancaria::getSaldo() { return this->saldo; }
+
+void ContaBancaria::mostrarDados() {
+    std::cout << "ContaBancaria::mostrarDados()\n";
+}

@@ -5,4 +5,9 @@ ContaCorrente::ContaCorrente(int numero, double saldo, double limite)
     this->limite = limite;
 }
 
-void ContaCorrente::mostrarDados() {}
+void ContaCorrente::mostrarDados() {
+    std::cout << "Número: " << this->numero << std::endl;
+    std::cout << "Tipo: conta corrente" << std::endl;
+    std::cout << "Saldo: R$ " << this->saldo << std::endl;
+    std::cout << "Limite: R$ " << this->limite << std::endl;
+}

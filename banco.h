@@ -1,9 +1,12 @@
 #ifndef BANCO_H
 #define BANCO_H
 
+#include <iostream>
 #include <vector>
 
 #include "contabancaria.h"
+#include "contacorrente.h"
+#include "contapoupanca.h"
 #include "imprimivel.h"
 
 /*
@@ -20,14 +23,16 @@ método consiste em executar método mostrar dados de cada conta.
 
 class Banco : public Imprimivel {
    public:
-    void inserir(ContaBancaria conta);
-    void remover(ContaBancaria conta);
+    void inserir(ContaBancaria* conta);
+    void remover(ContaBancaria* conta);
     ContaBancaria* procurarConta(int numero);
 
     void mostrarDados();
 
+    ~Banco();
+
    protected:
-    std::vector<ContaBancaria> contas;
+    std::vector<ContaBancaria*> contas;
 };
 
 #endif

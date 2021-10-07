@@ -1,6 +1,8 @@
 #ifndef CONTA_BANCARIA_H
 #define CONTA_BANCARIA_H
 
+enum TiposDeConta { Corrente = 1, Poupanca };
+
 /*
 Crie uma classe abstrata ContaBancaria que contém como atributos o número da
 conta e o saldo, e como métodos virtuais sacar e depositar que recebem um
@@ -21,6 +23,9 @@ ContaBancaria.
 class ContaBancaria {
    public:
     ContaBancaria(int numero, double saldo);
+
+    int getNumero();
+    double getSaldo();
 
     void sacar(double valor);
     void depositar(double valor);

@@ -44,7 +44,7 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
             break;
 
         default:
-            std::cout << "Opção inválida. Tente novamente.\n";
+            std::cout << "Opção inválida. Tente novamente.\n\n";
             menuPrincipal(false);
             break;
     }
@@ -53,7 +53,7 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
 }
 
 void Menu::menuPrincipal_criarConta() {
-    std::cout << "Opção escolhida: criar conta\n";
+    std::cout << "Opção escolhida: criar conta\n\n";
 
     int tipo = 0, numero;
     double saldoInicial, taxaDeOperacao, limite;
@@ -61,11 +61,12 @@ void Menu::menuPrincipal_criarConta() {
     while (tipo != TiposDeConta::Corrente && tipo != TiposDeConta::Poupanca) {
         std::cout << "Selecione o tipo de conta a ser criada:\n";
         std::cout << "1. Conta corrente\n";
-        std::cout << "2. Conta poupança\n";
+        std::cout << "2. Conta poupança\n\n";
         std::cout << "Digite uma opção: ";
         std::cin >> tipo;
     }
 
+    std::cout << std::endl;
     std::cout << "Número da conta: ";
     std::cin >> numero;
 
@@ -76,33 +77,34 @@ void Menu::menuPrincipal_criarConta() {
         std::cout << "Taxa de operação (R$): ";
         std::cin >> taxaDeOperacao;
 
-        ContaPoupanca conta(numero, saldoInicial, taxaDeOperacao);
-        this->pacbank.inserir(conta);
+        this->pacbank.inserir(
+            new ContaPoupanca(numero, saldoInicial, taxaDeOperacao));
 
     } else {
         std::cout << "Limite (R$): ";
         std::cin >> limite;
 
-        ContaCorrente conta(numero, saldoInicial, limite);
-        this->pacbank.inserir(conta);
+        this->pacbank.inserir(new ContaCorrente(numero, saldoInicial, limite));
     }
 }
 
 void Menu::menuPrincipal_selecionarConta() {
-    std::cout << "Opção escolhida: selecionar conta\n";
+    std::cout << "Opção escolhida: selecionar conta\n\n";
     menuConta();
 }
 
 void Menu::menuPrincipal_removerConta() {
-    std::cout << "Opção escolhida: remover conta\n";
+    std::cout << "Opção escolhida: remover conta\n\n";
 }
 
 void Menu::menuPrincipal_relatorioGeral() {
-    std::cout << "Opção escolhida: gerar relatório geral\n";
+    std::cout << "Opção escolhida: gerar relatório geral\n\n";
+    this->pacbank.mostrarDados();
 }
 
 void Menu::menuPrincipal_finalizar() {
-    std::cout << "Opção escolhida: finalizar\n";
+    std::cout << "Opção escolhida: finalizar\n\n";
+    this->pacbank.~Banco();
     exit(1);
 }
 
@@ -144,7 +146,7 @@ void Menu::menuConta(bool exibirOpcoes) {
             break;
 
         default:
-            std::cout << "\nOpção inválida. Tente novamente.\n";
+            std::cout << "\nOpção inválida. Tente novamente.\n\n";
             menuConta(false);
             break;
     }
@@ -156,17 +158,17 @@ void Menu::menuConta_depositar() {
     std::cout << "Opção escolhida: depositar\n";
 }
 
-void Menu::menuConta_sacar() { std::cout << "Opção escolhida: sacar\n"; }
+void Menu::menuConta_sacar() { std::cout << "Opção escolhida: sacar\n\n"; }
 
 void Menu::menuConta_transferir() {
-    std::cout << "Opção escolhida: transferir\n";
+    std::cout << "Opção escolhida: transferir\n\n";
 }
 
 void Menu::menuConta_relatorioIndividual() {
-    std::cout << "Opção escolhida: gerar relatório individual\n";
+    std::cout << "Opção escolhida: gerar relatório individual\n\n";
 }
 
 void Menu::menuConta_retornar() {
-    std::cout << "Opção escolhida: retornar ao menu principal\n";
+    std::cout << "Opção escolhida: retornar ao menu principal\n\n";
     menuPrincipal();
 }

@@ -23,8 +23,6 @@ enum MenuConta {
     Retornar
 };
 
-enum TiposDeConta { Corrente = 1, Poupanca };
-
 /*
 Crie uma classe Menu que instancie um banco e ofereça o seguinte menu
 para o usuário:
