@@ -94,7 +94,22 @@ void Menu::menuPrincipal_selecionarConta() {
 }
 
 void Menu::menuPrincipal_removerConta() {
+    int numero;
+
     std::cout << "Opção escolhida: remover conta\n\n";
+
+    std::cout << "Digite o número da conta a ser removida: ";
+    std::cin >> numero;
+
+    ContaBancaria* conta = this->pacbank.procurarConta(numero);
+
+    if (conta) {
+        this->pacbank.remover(conta);
+        std::cout << "Conta " << numero << " removida com sucesso.\n";
+    } else {
+        std::cout
+            << "Conta não encontrada. Verifique o número e tente novamente.\n";
+    }
 }
 
 void Menu::menuPrincipal_relatorioGeral() {

@@ -1,6 +1,7 @@
 #ifndef BANCO_H
 #define BANCO_H
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
