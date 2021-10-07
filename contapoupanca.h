@@ -19,6 +19,14 @@ class ContaPoupanca : public ContaBancaria, public Imprimivel {
    public:
     ContaPoupanca(int numero, double saldo, double taxaDeOperacao);
 
+    // Remove o valor solicitado da conta, se estiver disponível, considerando a
+    // taxa de operação a ser acrescentada
+    virtual void sacar(double valor);
+
+    // Adiciona o valor solicitado à conta (reimplementação para considerar a
+    // taxa de operação)
+    void depositar(double valor);
+
     void mostrarDados();
 
    protected:

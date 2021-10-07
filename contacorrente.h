@@ -18,6 +18,11 @@ pode acontecer na classe ContaCorrente.
 class ContaCorrente : public ContaBancaria, public Imprimivel {
    public:
     ContaCorrente(int numero, double saldo, double limite);
+
+    // Remove o valor solicitado da conta, se estiver disponível, considerando o
+    // saldo precisa ser > -limite
+    void sacar(double valor);
+
     void mostrarDados();
 
    protected:

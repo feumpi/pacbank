@@ -24,12 +24,21 @@ class ContaBancaria {
    public:
     ContaBancaria(int numero, double saldo);
 
+    // Getters
     int getNumero();
     double getSaldo();
 
-    void sacar(double valor);
-    void depositar(double valor);
+    // Remove o valor solicitado da conta, se estiver disponível (implementada
+    // pelas classes específicas)
+    virtual void sacar(double valor);
+
+    // Adiciona o valor solicitado à conta
+    virtual void depositar(double valor);
+
+    // Saca o valor informado da conta, se disponível, e deposita em outra
+    // informada
     void transferir(double valor, ContaBancaria conta);
+
     virtual void mostrarDados();
 
    protected:

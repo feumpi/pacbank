@@ -24,12 +24,22 @@ método consiste em executar método mostrar dados de cada conta.
 
 class Banco : public Imprimivel {
    public:
+    // Recebe um ponteiro de conta e insere ele no vetor de contas
     void inserir(ContaBancaria* conta);
+
+    // Recebe um ponteiro de conta e remove ele do vetor de contas, se
+    // encontrado
     void remover(ContaBancaria* conta);
+
+    // Recebe um número de conta e retorna o ponteiro da conta correspondente,
+    // se existir, ou NULL do contrário
     ContaBancaria* procurarConta(int numero);
 
+    // Chama a implementação de Imprimivel::mostrarDados() para todas as contas
+    // do vetor
     void mostrarDados();
 
+    // Remove todas as contas da heap e limpa o vetor de contas
     ~Banco();
 
    protected:

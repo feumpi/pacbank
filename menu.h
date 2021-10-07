@@ -53,6 +53,8 @@ mostraDados criado anteriormente.
 class Menu {
    public:
     Menu();
+
+    //"Telas" do menu principal
     void menuPrincipal(bool exibirOpcoes = true);
     void menuPrincipal_criarConta();
     void menuPrincipal_selecionarConta();
@@ -60,6 +62,7 @@ class Menu {
     void menuPrincipal_relatorioGeral();
     void menuPrincipal_finalizar();
 
+    //"Telas" do menu da conta selecionada
     void menuConta(bool exibirOpcoes = true);
     void menuConta_depositar();
     void menuConta_sacar();
