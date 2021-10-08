@@ -184,7 +184,14 @@ void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
 }
 
 void Menu::menuConta_depositar(ContaBancaria* conta) {
+    double valor;
+
     std::cout << "Opção escolhida: depositar\n";
+
+    std::cout << "Digite o valor a ser depositado: ";
+    std::cin >> valor;
+
+    conta->depositar(valor);
 }
 
 void Menu::menuConta_sacar(ContaBancaria* conta) {

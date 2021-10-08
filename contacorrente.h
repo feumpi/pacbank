@@ -21,7 +21,9 @@ class ContaCorrente : public ContaBancaria, public Imprimivel {
 
     // Verifica se o valor está disponível, considerando a taxa de operação, e
     // chama ContaBancaria::sacar
-    void sacar(double valor);
+    void sacar(double valor, bool silencioso = false);
+
+    void depositar(double valor, bool silencioso = false);
 
     void mostrarDados();
 
