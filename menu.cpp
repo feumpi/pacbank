@@ -62,7 +62,7 @@ void Menu::menuPrincipal_criarConta() {
     std::cout << "=====[ CRIAR CONTA ]=====\n\n";
 
     int tipo = 0, numero;
-    double saldoInicial, taxaDeOperacao, limite;
+    double saldoInicial = -1, taxaDeOperacao = -1, limite = -1;
 
     while (tipo != TiposDeConta::Corrente && tipo != TiposDeConta::Poupanca) {
         std::cout << "Selecione o tipo de conta a ser criada:\n";
@@ -73,21 +73,45 @@ void Menu::menuPrincipal_criarConta() {
         std::cout << "\n";
     }
 
-    std::cout << "Número da conta: ";
-    std::cin >> numero;
+    ContaBancaria* contaExistente = NULL;
 
-    std::cout << "Saldo inicial (R$): ";
-    std::cin >> saldoInicial;
+    // Repete a coleta do número enquanto já existir uma conta com ele
+    do {
+        std::cout << "Número da conta: ";
+        std::cin >> numero;
+        contaExistente = this->pacbank.procurarConta(numero);
+        if (contaExistente)
+            std::cout
+                << "Já existe uma conta com este número. Escolha outro.\n\n";
+    } while (contaExistente);
+
+    // Repete a coleta do saldo enquanto ele não for >= 0
+    do {
+        std::cout << "Saldo inicial (R$): ";
+        std::cin >> saldoInicial;
+        if (saldoInicial < 0)
+            std::cout << "Escolha um valor maior ou igual a 0\n\n";
+    } while (saldoInicial < 0);
 
     if (tipo == TiposDeConta::Poupanca) {
-        std::cout << "Limite (R$): ";
-        std::cin >> limite;
+        // Repete a coleta do limite enquanto ele não for > 0
+        do {
+            std::cout << "Limite (R$): ";
+            std::cin >> limite;
+            if (limite < 0)
+                std::cout << "Escolha um valor maior ou igual a 0\n\n";
+        } while (limite < 0);
 
         this->pacbank.inserir(new ContaPoupanca(numero, saldoInicial, limite));
 
     } else {
-        std::cout << "Taxa de operação (R$): ";
-        std::cin >> taxaDeOperacao;
+        // Repete a coleta da taxa enquanto ela não for > 0
+        do {
+            std::cout << "Taxa de operação (R$): ";
+            std::cin >> taxaDeOperacao;
+            if (taxaDeOperacao < 0)
+                std::cout << "Escolha um valor maior ou igual a 0\n\n";
+        } while (taxaDeOperacao < 0);
 
         this->pacbank.inserir(
             new ContaCorrente(numero, saldoInicial, taxaDeOperacao));
@@ -197,8 +221,12 @@ void Menu::menuConta_depositar(ContaBancaria* conta) {
 
     std::cout << "=====[ DEPOSITAR ]=====\n\n";
 
-    std::cout << "Digite o valor a ser depositado: ";
-    std::cin >> valor;
+    // Repete a coleta do valor enquanto ele não for > 0
+    do {
+        std::cout << "Digite o valor a ser depositado (R$): ";
+        std::cin >> valor;
+        if (valor <= 0) std::cout << "Escolha um valor maior que 0.\n\n";
+    } while (valor <= 0);
 
     std::cout << "\n";
 
@@ -212,8 +240,12 @@ void Menu::menuConta_sacar(ContaBancaria* conta) {
 
     std::cout << "=====[ SACAR ]=====\n\n";
 
-    std::cout << "Digite o valor do saque (R$): ";
-    std::cin >> valor;
+    // Repete a coleta do valor enquanto ele não for > 0
+    do {
+        std::cout << "Digite o valor do saque (R$): ";
+        std::cin >> valor;
+        if (valor <= 0) std::cout << "Escolha um valor maior que 0.\n\n";
+    } while (valor <= 0);
 
     std::cout << "\n";
 
