@@ -110,6 +110,14 @@ Escolhendo a opção de selecionar uma conta, o programa coleta o número da con
 
 Com a conta já selecionada, o programa coleta o valor desejado para o saque. Após verificações próprias das implementações de `ContaCorrente::saque` e `ContaPoupanca::saque`, que levam em conta a taxa de operação, limite e mínimo valor possível para o saldo em cada, o método da classe pai `ContaBancaria::saque` é usado para fazer de fato o saque, se ele for válido.
 
+O método `ContaBancaria::saque` possui um parâmetro `bool silencioso`, `false`por padrão, que permite subtrair o valor do saldo sem imprimir nada na tela. O desconto da taxa de operação `ContaCorrente::saque` é na verdade um saque silencioso que precede o saque principal.
+
 ### Depósito
+
+`ContaPoupanca` usa a implementação básica `ContaBancaria::depositar`, que apenas adiciona o valor desejado ao saldo.
+
+`ContaCorrente` reimplementa o método para considerar a taxa de operação. O depósito é concluido se ao acrescentar o valor depositado ao saldo e subtrair dele a taxa de operação, o saldo continuar maior ou igual a 0. Em alguns casos específicos, é possível que o saldo após o depósito seja inferior. Exemplo: saldo de `2.50` com taxa de operação `5.00` e depósito de `2.50` deixará o saldo final igual a `0` (mas nunca negativo).
+
+Novamente, o desconto da taxa de operação é feito através de um saque silencioso usando `ContaBancaria::saque`.
 
 ### Transferência
