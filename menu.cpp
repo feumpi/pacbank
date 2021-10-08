@@ -255,7 +255,29 @@ void Menu::menuConta_sacar(ContaBancaria* conta) {
 }
 
 void Menu::menuConta_transferir(ContaBancaria* conta) {
+    int numero;
+    double valor;
+
     std::cout << "=====[ TRANSFERIR ]=====\n\n";
+
+    std::cout << "Digite o número da conta de destino: ";
+    std::cin >> numero;
+
+    ContaBancaria* contaDestino = this->pacbank.procurarConta(numero);
+
+    if (!contaDestino) {
+        std::cout
+            << "A conta não existe. Verifique o número e tente novamente\n\n";
+        return;
+    }
+
+    do {
+        std::cout << "Digite o valor a ser transferido: ";
+        std::cin >> valor;
+        if (valor <= 0) std::cout << "Escolha um valor maior que 0.\n\n";
+    } while (valor <= 0);
+
+    conta->transferir(valor, contaDestino);
 }
 
 void Menu::menuConta_relatorioIndividual(ContaBancaria* conta) {

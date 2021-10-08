@@ -5,7 +5,7 @@ ContaCorrente::ContaCorrente(int numero, double saldo, double taxaDeOperacao)
     this->taxaDeOperacao = taxaDeOperacao;
 }
 
-void ContaCorrente::sacar(double valor, bool silencioso) {
+bool ContaCorrente::sacar(double valor, bool silencioso) {
     double valorTotal = valor + this->taxaDeOperacao;
 
     // Se o saldo for >= valor + taxa de operação, desconta a taxa e faz o saque
@@ -22,7 +22,7 @@ void ContaCorrente::sacar(double valor, bool silencioso) {
         // Saca o valor solicitado (informa o novo saldo pós saque e taxa)
         ContaBancaria::sacar(valor, silencioso);
 
-        return;
+        return true;
     }
 
     // Do contrário, não é possível sacar
@@ -32,9 +32,11 @@ void ContaCorrente::sacar(double valor, bool silencioso) {
                   << std::setprecision(2) << std::fixed << this->taxaDeOperacao
                   << "\n";
     }
+
+    return false;
 }
 
-void ContaCorrente::depositar(double valor, bool silencioso) {
+bool ContaCorrente::depositar(double valor, bool silencioso) {
     // Valor após descontar a taxa de operação (pode ser negativo)
     double valorFinal = valor - this->taxaDeOperacao;
 
@@ -53,7 +55,7 @@ void ContaCorrente::depositar(double valor, bool silencioso) {
         // depósito)
         ContaBancaria::depositar(valor, silencioso);
 
-        return;
+        return true;
     }
 
     // Do contrário, não é possível depositar
@@ -62,6 +64,7 @@ void ContaCorrente::depositar(double valor, bool silencioso) {
                      "valor de R$ "
                   << this->taxaDeOperacao << "\n";
     }
+    return false;
 }
 
 void ContaCorrente::mostrarDados() {

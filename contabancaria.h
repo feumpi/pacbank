@@ -29,14 +29,14 @@ class ContaBancaria {
     double getSaldo();
 
     // Remove o valor solicitado da conta SEM FAZER VALIDAÇÃO
-    virtual void sacar(double valor, bool silencioso = false);
+    virtual bool sacar(double valor, bool silencioso = false);
 
     // Adiciona o valor solicitado à conta
-    virtual void depositar(double valor, bool silencioso = false);
+    virtual bool depositar(double valor, bool silencioso = false);
 
     // Saca o valor informado da conta, se disponível, e deposita em outra
     // informada
-    void transferir(double valor, ContaBancaria conta);
+    void transferir(double valor, ContaBancaria* contaDestino);
 
     virtual void mostrarDados();
 

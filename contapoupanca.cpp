@@ -5,7 +5,7 @@ ContaPoupanca::ContaPoupanca(int numero, double saldo, double limite)
     this->limite = limite;
 }
 
-void ContaPoupanca::sacar(double valor, bool silencioso) {
+bool ContaPoupanca::sacar(double valor, bool silencioso) {
     // Se o saldo após subtrair o valor não ficar negativo além do limite
     if ((this->saldo - valor) >= this->limite * -1) {
         // Aviso de uso do limite (saldo negativo)
@@ -17,7 +17,7 @@ void ContaPoupanca::sacar(double valor, bool silencioso) {
         // Faz o saque do valor solicitado, em modo silencioso ou não
         ContaBancaria::sacar(valor, silencioso);
 
-        return;
+        return true;
     }
 
     // Do contrário, não é possível sacar
@@ -27,6 +27,8 @@ void ContaPoupanca::sacar(double valor, bool silencioso) {
                "saldo em até R$ "
             << std::setprecision(2) << std::fixed << this->limite << "\n";
     }
+
+    return false;
 }
 
 void ContaPoupanca::mostrarDados() {

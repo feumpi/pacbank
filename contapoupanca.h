@@ -22,7 +22,7 @@ class ContaPoupanca : public ContaBancaria, public Imprimivel {
 
     // Verifica se o valor está disponível, considerando o limite, e chama
     // ContaBancaria::sacar
-    void sacar(double valor, bool silencioso = false);
+    bool sacar(double valor, bool silencioso = false);
 
     void mostrarDados();
 
