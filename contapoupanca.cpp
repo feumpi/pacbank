@@ -25,13 +25,15 @@ void ContaPoupanca::sacar(double valor, bool silencioso) {
         std::cout
             << "Saldo e limite insuficientes. Sua poupança pode exceder o "
                "saldo em até R$ "
-            << this->limite << "\n";
+            << std::setprecision(2) << std::fixed << this->limite << "\n";
     }
 }
 
 void ContaPoupanca::mostrarDados() {
-    std::cout << "Número: " << this->numero << std::endl;
+    std::cout << "=====[ CONTA " << this->numero << " ]=====" << std::endl;
     std::cout << "Tipo: conta poupança" << std::endl;
-    std::cout << "Saldo: R$ " << this->saldo << std::endl;
-    std::cout << "Limite: R$ " << this->limite << std::endl;
+    std::cout << "Saldo: R$ " << std::setprecision(2) << std::fixed
+              << this->saldo << std::endl;
+    std::cout << "Limite: R$ " << std::setprecision(2) << std::fixed
+              << this->limite << "\n\n";
 }

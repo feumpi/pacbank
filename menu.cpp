@@ -1,7 +1,11 @@
 #include "menu.h"
 
 Menu::Menu() {
-    std::cout << "Bem-vindo ao Pacbank!" << std::endl;
+    std::cout << "#############################\n";
+    std::cout << "#          PACBANK          #\n";
+    std::cout << "#############################\n";
+    std::cout << "Bem-vindo ao Pacbank!"
+              << "\n\n\n";
 
     menuPrincipal();
 }
@@ -10,8 +14,9 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
     int opcao;
 
     if (exibirOpcoes) {
-        std::cout << "Opções:\n\n";
+        std::cout << "=====[ MENU PRINCIPAL ]=====\n\n";
 
+        std::cout << "Opções:\n";
         std::cout << "1. Criar conta\n";
         std::cout << "2. Selecionar conta\n";
         std::cout << "3. Remover conta\n";
@@ -21,6 +26,7 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
 
     std::cout << "Digite uma opção: ";
     std::cin >> opcao;
+    std::cout << "\n\n";
 
     switch (opcao) {
         case MenuPrincipal::CriarConta:
@@ -53,7 +59,7 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
 }
 
 void Menu::menuPrincipal_criarConta() {
-    std::cout << "Opção escolhida: criar conta\n\n";
+    std::cout << "=====[ CRIAR CONTA ]=====\n\n";
 
     int tipo = 0, numero;
     double saldoInicial, taxaDeOperacao, limite;
@@ -64,9 +70,9 @@ void Menu::menuPrincipal_criarConta() {
         std::cout << "2. Conta poupança\n\n";
         std::cout << "Digite uma opção: ";
         std::cin >> tipo;
+        std::cout << "\n";
     }
 
-    std::cout << std::endl;
     std::cout << "Número da conta: ";
     std::cin >> numero;
 
@@ -86,29 +92,32 @@ void Menu::menuPrincipal_criarConta() {
         this->pacbank.inserir(
             new ContaCorrente(numero, saldoInicial, taxaDeOperacao));
     }
+
+    std::cout << "\nConta criada com sucesso!\n\n";
 }
 
 void Menu::menuPrincipal_selecionarConta() {
     int numero;
 
-    std::cout << "Opção escolhida: selecionar conta\n\n";
+    std::cout << "=====[ SELECIONAR CONTA ]=====\n\n";
     std::cout << "Digite o número da conta desejada: ";
     std::cin >> numero;
 
     ContaBancaria* conta = this->pacbank.procurarConta(numero);
 
     if (conta) {
+        std::cout << "\n\n";
         menuConta(conta);
     } else {
         std::cout
-            << "Conta não encontrada. Verifique o número e tente novamente\n";
+            << "Conta não encontrada. Verifique o número e tente novamente\n\n";
     }
 }
 
 void Menu::menuPrincipal_removerConta() {
     int numero;
 
-    std::cout << "Opção escolhida: remover conta\n\n";
+    std::cout << "=====[ REMOVER CONTA ]=====\n\n";
 
     std::cout << "Digite o número da conta a ser removida: ";
     std::cin >> numero;
@@ -117,32 +126,31 @@ void Menu::menuPrincipal_removerConta() {
 
     if (conta) {
         this->pacbank.remover(conta);
-        std::cout << "Conta " << numero << " removida com sucesso.\n";
+        std::cout << "Conta " << numero << " removida com sucesso.\n\n";
     } else {
-        std::cout
-            << "Conta não encontrada. Verifique o número e tente novamente.\n";
+        std::cout << "Conta não encontrada. Verifique o número e tente "
+                     "novamente.\n\n";
     }
 }
 
 void Menu::menuPrincipal_relatorioGeral() {
-    std::cout << "Opção escolhida: gerar relatório geral\n\n";
+    std::cout << "=====[ RELATÓRIO GERAL ]=====\n\n";
     this->pacbank.mostrarDados();
 }
 
 void Menu::menuPrincipal_finalizar() {
-    std::cout << "Opção escolhida: finalizar\n\n";
+    std::cout << "=====[ FINALIZAR ]=====\n\n";
     this->pacbank.~Banco();
     exit(1);
 }
 
 void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
     int opcao;
-
+    std::cout << "=====[ MENU DA CONTA ]=====\n";
     std::cout << "Conta selecionada: " << conta->getNumero() << "\n\n";
 
     if (exibirOpcoes) {
-        std::cout << "Opções:\n\n";
-
+        std::cout << "Opções:\n";
         std::cout << "1. Depositar\n";
         std::cout << "2. Sacar\n";
         std::cout << "3. Transferir\n";
@@ -152,6 +160,7 @@ void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
 
     std::cout << "Digite uma opção: ";
     std::cin >> opcao;
+    std::cout << "\n\n";
 
     switch (opcao) {
         case MenuConta::Depositar:
@@ -186,38 +195,42 @@ void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
 void Menu::menuConta_depositar(ContaBancaria* conta) {
     double valor;
 
-    std::cout << "Opção escolhida: depositar\n";
+    std::cout << "=====[ DEPOSITAR ]=====\n\n";
 
     std::cout << "Digite o valor a ser depositado: ";
     std::cin >> valor;
 
+    std::cout << "\n";
+
     conta->depositar(valor);
+
+    std::cout << "\n\n";
 }
 
 void Menu::menuConta_sacar(ContaBancaria* conta) {
     double valor;
 
-    std::cout << "Opção escolhida: sacar\n\n";
+    std::cout << "=====[ SACAR ]=====\n\n";
 
     std::cout << "Digite o valor do saque (R$): ";
     std::cin >> valor;
 
+    std::cout << "\n";
+
     conta->sacar(valor);
+
+    std::cout << "\n\n";
 }
 
 void Menu::menuConta_transferir(ContaBancaria* conta) {
-    std::cout << "Opção escolhida: transferir\n\n";
+    std::cout << "=====[ TRANSFERIR ]=====\n\n";
 }
 
 void Menu::menuConta_relatorioIndividual(ContaBancaria* conta) {
-    std::cout << "Opção escolhida: gerar relatório individual\n\n";
+    std::cout << "=====[ RELATÓRIO INDIVIDUAL ]=====\n\n";
 
-    std::cout << "==========\n";
     conta->mostrarDados();
-    std::cout << "==========\n";
+    std::cout << "\n====================\n\n";
 }
 
-void Menu::menuConta_retornar() {
-    std::cout << "Opção escolhida: retornar ao menu principal\n\n";
-    menuPrincipal();
-}
+void Menu::menuConta_retornar() { menuPrincipal(); }

@@ -13,6 +13,7 @@ void ContaCorrente::sacar(double valor, bool silencioso) {
         // Aviso de taxa de operação
         if (!silencioso)
             std::cout << "Taxa de operação aplicada: R$ "
+                      << std::setprecision(2) << std::fixed
                       << this->taxaDeOperacao << "\n";
 
         // Saca a taxa de operação (em modo silencioso)
@@ -28,7 +29,8 @@ void ContaCorrente::sacar(double valor, bool silencioso) {
     if (!silencioso) {
         std::cout << "Saldo insuficiente. Considere a taxa de operação no "
                      "valor de R$ "
-                  << this->taxaDeOperacao << "\n";
+                  << std::setprecision(2) << std::fixed << this->taxaDeOperacao
+                  << "\n";
     }
 }
 
@@ -41,6 +43,7 @@ void ContaCorrente::depositar(double valor, bool silencioso) {
         // Aviso de taxa de operação
         if (!silencioso)
             std::cout << "Taxa de operação aplicada: R$ "
+                      << std::setprecision(2) << std::fixed
                       << this->taxaDeOperacao << "\n";
 
         // Saca a taxa de operação (em modo silencioso)
@@ -62,8 +65,10 @@ void ContaCorrente::depositar(double valor, bool silencioso) {
 }
 
 void ContaCorrente::mostrarDados() {
-    std::cout << "Número: " << this->numero << std::endl;
+    std::cout << "=====[ CONTA " << this->numero << " ]=====" << std::endl;
     std::cout << "Tipo: conta corrente" << std::endl;
-    std::cout << "Saldo: R$ " << this->saldo << std::endl;
-    std::cout << "Taxa de operação: R$ " << this->taxaDeOperacao << std::endl;
+    std::cout << "Saldo: R$ " << std::setprecision(2) << std::fixed
+              << this->saldo << "\n";
+    std::cout << "Taxa de operação: R$ " << std::setprecision(2) << std::fixed
+              << this->taxaDeOperacao << "\n\n";
 }

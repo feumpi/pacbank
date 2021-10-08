@@ -1,17 +1,12 @@
 #include "banco.h"
 
-void Banco::inserir(ContaBancaria* conta) {
-    this->contas.push_back(conta);
-    std::cout << "Conta criada com sucesso!\n";
-}
+void Banco::inserir(ContaBancaria* conta) { this->contas.push_back(conta); }
 
 void Banco::mostrarDados() {
-    std::cout << "====================\n";
     // Chama a implementação de mostrarDados para todas as contas do vetor, com
     // um separador em baixo
     for (auto conta : this->contas) {
         conta->mostrarDados();
-        std::cout << "====================\n";
     }
 }
 

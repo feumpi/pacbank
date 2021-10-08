@@ -1,6 +1,7 @@
 #ifndef CONTA_CORRENTE_H
 #define CONTA_CORRENTE_H
 
+#include <iomanip>
 #include <iostream>
 
 #include "contabancaria.h"
