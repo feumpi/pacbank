@@ -63,11 +63,11 @@ class Menu {
     void menuPrincipal_finalizar();
 
     //"Telas" do menu da conta selecionada
-    void menuConta(bool exibirOpcoes = true);
-    void menuConta_depositar();
-    void menuConta_sacar();
-    void menuConta_transferir();
-    void menuConta_relatorioIndividual();
+    void menuConta(ContaBancaria* conta, bool exibirOpcoes = true);
+    void menuConta_depositar(ContaBancaria* conta);
+    void menuConta_sacar(ContaBancaria* conta);
+    void menuConta_transferir(ContaBancaria* conta);
+    void menuConta_relatorioIndividual(ContaBancaria* conta);
     void menuConta_retornar();
 
    protected:

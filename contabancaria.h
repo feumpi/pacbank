@@ -33,7 +33,7 @@ class ContaBancaria {
     virtual void sacar(double valor);
 
     // Adiciona o valor solicitado à conta
-    virtual void depositar(double valor);
+    void depositar(double valor);
 
     // Saca o valor informado da conta, se disponível, e deposita em outra
     // informada

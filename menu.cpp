@@ -89,8 +89,20 @@ void Menu::menuPrincipal_criarConta() {
 }
 
 void Menu::menuPrincipal_selecionarConta() {
+    int numero;
+
     std::cout << "Opção escolhida: selecionar conta\n\n";
-    menuConta();
+    std::cout << "Digite o número da conta desejada: ";
+    std::cin >> numero;
+
+    ContaBancaria* conta = this->pacbank.procurarConta(numero);
+
+    if (conta) {
+        menuConta(conta);
+    } else {
+        std::cout
+            << "Conta não encontrada. Verifique o número e tente novamente\n";
+    }
 }
 
 void Menu::menuPrincipal_removerConta() {
@@ -123,8 +135,10 @@ void Menu::menuPrincipal_finalizar() {
     exit(1);
 }
 
-void Menu::menuConta(bool exibirOpcoes) {
+void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
     int opcao;
+
+    std::cout << "Conta selecionada: " << conta->getNumero() << "\n\n";
 
     if (exibirOpcoes) {
         std::cout << "Opções:\n\n";
@@ -141,19 +155,19 @@ void Menu::menuConta(bool exibirOpcoes) {
 
     switch (opcao) {
         case MenuConta::Depositar:
-            menuConta_depositar();
+            menuConta_depositar(conta);
             break;
 
         case MenuConta::Sacar:
-            menuConta_sacar();
+            menuConta_sacar(conta);
             break;
 
         case MenuConta::Transferir:
-            menuConta_transferir();
+            menuConta_transferir(conta);
             break;
 
         case MenuConta::RelatorioIndividual:
-            menuConta_relatorioIndividual();
+            menuConta_relatorioIndividual(conta);
             break;
 
         case MenuConta::Retornar:
@@ -162,25 +176,31 @@ void Menu::menuConta(bool exibirOpcoes) {
 
         default:
             std::cout << "\nOpção inválida. Tente novamente.\n\n";
-            menuConta(false);
+            menuConta(conta, false);
             break;
     }
 
-    menuConta();
+    menuConta(conta);
 }
 
-void Menu::menuConta_depositar() {
+void Menu::menuConta_depositar(ContaBancaria* conta) {
     std::cout << "Opção escolhida: depositar\n";
 }
 
-void Menu::menuConta_sacar() { std::cout << "Opção escolhida: sacar\n\n"; }
+void Menu::menuConta_sacar(ContaBancaria* conta) {
+    std::cout << "Opção escolhida: sacar\n\n";
+}
 
-void Menu::menuConta_transferir() {
+void Menu::menuConta_transferir(ContaBancaria* conta) {
     std::cout << "Opção escolhida: transferir\n\n";
 }
 
-void Menu::menuConta_relatorioIndividual() {
+void Menu::menuConta_relatorioIndividual(ContaBancaria* conta) {
     std::cout << "Opção escolhida: gerar relatório individual\n\n";
+
+    std::cout << "==========\n";
+    conta->mostrarDados();
+    std::cout << "==========\n";
 }
 
 void Menu::menuConta_retornar() {
