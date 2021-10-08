@@ -17,7 +17,7 @@ pode acontecer na classe ContaCorrente.
 
 class ContaCorrente : public ContaBancaria, public Imprimivel {
    public:
-    ContaCorrente(int numero, double saldo, double limite);
+    ContaCorrente(int numero, double saldo, double taxaDeOperacao);
 
     // Remove o valor solicitado da conta, se estiver disponível, considerando o
     // saldo precisa ser > -limite
@@ -26,7 +26,7 @@ class ContaCorrente : public ContaBancaria, public Imprimivel {
     void mostrarDados();
 
    protected:
-    double limite;
+    double taxaDeOperacao;
 };
 
 #endif

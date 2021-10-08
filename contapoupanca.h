@@ -17,7 +17,7 @@ pode acontecer na classe ContaCorrente.
 
 class ContaPoupanca : public ContaBancaria, public Imprimivel {
    public:
-    ContaPoupanca(int numero, double saldo, double taxaDeOperacao);
+    ContaPoupanca(int numero, double saldo, double limite);
 
     // Remove o valor solicitado da conta, se estiver disponível, considerando a
     // taxa de operação a ser acrescentada
@@ -30,7 +30,7 @@ class ContaPoupanca : public ContaBancaria, public Imprimivel {
     void mostrarDados();
 
    protected:
-    double taxaDeOperacao;
+    double limite;
 };
 
 #endif
