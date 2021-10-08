@@ -28,8 +28,7 @@ class ContaBancaria {
     int getNumero();
     double getSaldo();
 
-    // Remove o valor solicitado da conta, se estiver disponível (implementada
-    // pelas classes específicas)
+    // Remove o valor solicitado da conta SEM FAZER VALIDAÇÃO
     virtual void sacar(double valor);
 
     // Adiciona o valor solicitado à conta

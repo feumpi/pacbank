@@ -19,8 +19,8 @@ class ContaPoupanca : public ContaBancaria, public Imprimivel {
    public:
     ContaPoupanca(int numero, double saldo, double limite);
 
-    // Remove o valor solicitado da conta, se estiver disponível, considerando a
-    // taxa de operação a ser acrescentada
+    // Verifica se o valor está disponível, considerando o limite, e chama
+    // ContaBancaria::sacar
     void sacar(double valor);
 
     // Adiciona o valor solicitado à conta (reimplementação para considerar a

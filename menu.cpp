@@ -74,17 +74,17 @@ void Menu::menuPrincipal_criarConta() {
     std::cin >> saldoInicial;
 
     if (tipo == TiposDeConta::Poupanca) {
+        std::cout << "Limite (R$): ";
+        std::cin >> limite;
+
+        this->pacbank.inserir(new ContaPoupanca(numero, saldoInicial, limite));
+
+    } else {
         std::cout << "Taxa de operação (R$): ";
         std::cin >> taxaDeOperacao;
 
         this->pacbank.inserir(
-            new ContaPoupanca(numero, saldoInicial, taxaDeOperacao));
-
-    } else {
-        std::cout << "Limite (R$): ";
-        std::cin >> limite;
-
-        this->pacbank.inserir(new ContaCorrente(numero, saldoInicial, limite));
+            new ContaCorrente(numero, saldoInicial, taxaDeOperacao));
     }
 }
 
@@ -188,7 +188,14 @@ void Menu::menuConta_depositar(ContaBancaria* conta) {
 }
 
 void Menu::menuConta_sacar(ContaBancaria* conta) {
+    double valor;
+
     std::cout << "Opção escolhida: sacar\n\n";
+
+    std::cout << "Digite o valor do saque (R$): ";
+    std::cin >> valor;
+
+    conta->sacar(valor);
 }
 
 void Menu::menuConta_transferir(ContaBancaria* conta) {

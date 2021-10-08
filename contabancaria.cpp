@@ -10,7 +10,9 @@ int ContaBancaria::getNumero() { return this->numero; }
 double ContaBancaria::getSaldo() { return this->saldo; }
 
 void ContaBancaria::sacar(double valor) {
-    std::cout << "ContaBancaria::sacar\n";
+    this->saldo -= std::abs(valor);
+    std::cout << "Saque no valor de R$ " << valor << " efetuado com sucesso!\n";
+    std::cout << "Novo saldo: R$ " << this->saldo << "\n";
 }
 
 void ContaBancaria::mostrarDados() {

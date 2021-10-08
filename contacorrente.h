@@ -19,8 +19,8 @@ class ContaCorrente : public ContaBancaria, public Imprimivel {
    public:
     ContaCorrente(int numero, double saldo, double taxaDeOperacao);
 
-    // Remove o valor solicitado da conta, se estiver disponível, considerando o
-    // saldo precisa ser > -limite
+    // Verifica se o valor está disponível, considerando a taxa de operação, e
+    // chama ContaBancaria::sacar
     void sacar(double valor);
 
     void mostrarDados();
