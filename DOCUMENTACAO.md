@@ -60,11 +60,19 @@ Responsável por guardar os ponteiros das contas criadas na heap em `std::vector
 
 ### Classe Imprimivel
 
+Uma classe puramente abstrata que define o método `mostrarDados`. As classes que herdam dela, como `Banco`, `ContaCorrente` e `ContaPoupanca` implementam o método imprimindo informações sobre si mesmas na tela.
+
 ### Classe Menu
+
+Responsável pela interação com o usuário, exibindo opções, coletando a entrada e chamando as funções correspondentes continuamente, até que o usuário escolha a opção de parar. Também cuida da instância de um objeto `Banco` durante todo o período de interação.
 
 ### Classe Relatorio
 
+Contém o método `gerarRelatorio`, que recebe um objeto `Imprimivel*`, ou seja, qualquer ponteiro de uma classe derivada de `Imprimivel`, e executa o método `mostrarDados` implementado por ele.
+
 ### Classe Executavel
+
+Executa o programa em modo não interativo, criando uma conta de cada tipo, fazendo um depósito e um saque em cada e por fim gerando um relatório para cada.
 
 ---
 
@@ -112,6 +120,8 @@ Com a conta já selecionada, o programa coleta o valor desejado para o saque. Ap
 
 O método `ContaBancaria::saque` possui um parâmetro `bool silencioso`, `false`por padrão, que permite subtrair o valor do saldo sem imprimir nada na tela. O desconto da taxa de operação `ContaCorrente::saque` é na verdade um saque silencioso que precede o saque principal.
 
+Em todos os casos, os métodos de saque retornam `true` se bem-sucedido ou `false` em caso de falha.
+
 ### Depósito
 
 `ContaPoupanca` usa a implementação básica `ContaBancaria::depositar`, que apenas adiciona o valor desejado ao saldo.
@@ -120,4 +130,12 @@ O método `ContaBancaria::saque` possui um parâmetro `bool silencioso`, `false`
 
 Novamente, o desconto da taxa de operação é feito através de um saque silencioso usando `ContaBancaria::saque`.
 
+Em todos os casos, os métodos de depósito retornam `true` se bem-sucedido ou `false` em caso de falha.
+
 ### Transferência
+
+Implementada apenas como `ContaBancaria::transferencia`, guarda o valor do próprio saldo em `double saldoInicial` faz primeiro uma tentativa de saque no valor correspondente com o método próprio já implementado. Se o saque falhar (retornando `false`), avisa sobre a falta de saldo e encerra.
+
+Com o saque bem-sucedido, faz uma tentativa de depósito do mesmo valor na conta de origem. Se bem-sucedido, avisa que a transferência foi concluída.
+
+Em casos específicos, o depósito pode falhar para a conta corrente, se o saldo + valor depositado forem menores que a taxa de operação aplicada, o que deixaria o saldo final negativo. Nessa hipótese, a transferência também é cancelada e o `saldoInicial` da conta de origem é reestabelecido.
