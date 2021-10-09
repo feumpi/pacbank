@@ -139,3 +139,7 @@ Implementada apenas como `ContaBancaria::transferencia`, guarda o valor do próp
 Com o saque bem-sucedido, faz uma tentativa de depósito do mesmo valor na conta de origem. Se bem-sucedido, avisa que a transferência foi concluída.
 
 Em casos específicos, o depósito pode falhar para a conta corrente, se o saldo + valor depositado forem menores que a taxa de operação aplicada, o que deixaria o saldo final negativo. Nessa hipótese, a transferência também é cancelada e o `saldoInicial` da conta de origem é reestabelecido.
+
+### Executavel
+
+Quando iniciado em modo executável, o programa instancia uma conta de cada tipo, faz um depósito e depois um saque para cada e por fim gera um relatório de ambas.
