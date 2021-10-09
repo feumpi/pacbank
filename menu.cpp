@@ -51,10 +51,12 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
 
         default:
             std::cout << "Opção inválida. Tente novamente.\n\n";
+            // Volta ao menu sem reimprimir as opções
             menuPrincipal(false);
             break;
     }
 
+    // Volta ao menu depois de concluir a operação anterior
     menuPrincipal();
 }
 
@@ -63,24 +65,29 @@ void Menu::menuPrincipal_criarConta() {
 
     int tipo = 0, numero;
     double saldoInicial = -1, taxaDeOperacao = -1, limite = -1;
+    ContaBancaria* contaExistente;
 
+    // Repete a coleta do tipo de conta enquanto for inválido, cancela a
+    // operação se for 0
     while (tipo != TiposDeConta::Corrente && tipo != TiposDeConta::Poupanca) {
         std::cout << "Selecione o tipo de conta a ser criada:\n";
         std::cout << "1. Conta corrente\n";
         std::cout << "2. Conta poupança\n\n";
+
         std::cout << "Digite uma opção (0 = cancelar): ";
         std::cin >> tipo;
         std::cout << "\n";
+
         if (tipo == 0) return;
     }
 
+    // Imprime o tipo de conta escolhida
     std::cout << "Criando uma nova conta "
               << (tipo == TiposDeConta::Corrente ? "corrente" : "poupanca")
               << "\n";
 
-    ContaBancaria* contaExistente = NULL;
-
-    // Repete a coleta do número enquanto já existir uma conta com ele
+    // Repete a coleta do número enquanto já existir uma conta com ele ou o
+    // número for negativo
     do {
         std::cout << "Número da conta (0 = cancelar): ";
         std::cin >> numero;
@@ -103,8 +110,9 @@ void Menu::menuPrincipal_criarConta() {
             std::cout << "Escolha um valor maior ou igual a 0\n\n";
     } while (saldoInicial < 0);
 
+    // Se for poupança
     if (tipo == TiposDeConta::Poupanca) {
-        // Repete a coleta do limite enquanto ele não for > 0
+        // Repete a coleta do limite enquanto ele não for >= 0
         do {
             std::cout << "Limite (R$): ";
             std::cin >> limite;
@@ -112,10 +120,14 @@ void Menu::menuPrincipal_criarConta() {
                 std::cout << "Escolha um valor maior ou igual a 0\n\n";
         } while (limite < 0);
 
+        // Cria a poupança na heap usando os dados coletados e insere no banco
         this->pacbank.inserir(new ContaPoupanca(numero, saldoInicial, limite));
 
-    } else {
-        // Repete a coleta da taxa enquanto ela não for > 0
+    }
+
+    // Se for corrente
+    else {
+        // Repete a coleta da taxa enquanto ela não for >= 0
         do {
             std::cout << "Taxa de operação (R$): ";
             std::cin >> taxaDeOperacao;
@@ -123,6 +135,8 @@ void Menu::menuPrincipal_criarConta() {
                 std::cout << "Escolha um valor maior ou igual a 0\n\n";
         } while (taxaDeOperacao < 0);
 
+        // Cria a conta corrente na heap usando os dados coletados e insere no
+        // banco
         this->pacbank.inserir(
             new ContaCorrente(numero, saldoInicial, taxaDeOperacao));
     }
@@ -132,10 +146,12 @@ void Menu::menuPrincipal_criarConta() {
 
 void Menu::menuPrincipal_selecionarConta() {
     int numero;
-    ContaBancaria* conta = NULL;
+    ContaBancaria* conta;
 
     std::cout << "=====[ SELECIONAR CONTA ]=====\n\n";
 
+    // Repete a coleta do número enquanto não for encontrada, ou cancela a
+    // operação se for 0
     do {
         std::cout << "Digite o número da conta desejada (0 = cancelar): ";
         std::cin >> numero;
@@ -148,6 +164,8 @@ void Menu::menuPrincipal_selecionarConta() {
     } while (!conta);
 
     std::cout << "\n\n";
+
+    // Continua para o menu da conta quando encontrada
     menuConta(conta);
 }
 
@@ -157,6 +175,8 @@ void Menu::menuPrincipal_removerConta() {
 
     std::cout << "=====[ REMOVER CONTA ]=====\n\n";
 
+    // Repete a coleta do número enquanto não encontrada, ou cancela a operação
+    // se for 0
     do {
         std::cout << "Digite o número da conta a ser removida (0 = cancelar): ";
         std::cin >> numero;
@@ -167,6 +187,7 @@ void Menu::menuPrincipal_removerConta() {
                          "novamente\n\n";
     } while (!conta);
 
+    // Passa a conta a ser removida para o banco
     this->pacbank.remover(conta);
 }
 
@@ -177,7 +198,10 @@ void Menu::menuPrincipal_relatorioGeral() {
 
 void Menu::menuPrincipal_finalizar() {
     std::cout << "Finalizando o programa...\n\n";
+    // Chama o destrutor do banco manualmente (ignorado pelo exit)
     this->pacbank.~Banco();
+
+    // Encerra o programa
     exit(1);
 }
 
@@ -222,10 +246,13 @@ void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
 
         default:
             std::cout << "\nOpção inválida. Tente novamente.\n\n";
+
+            // Volta para o menu da conta sem reexibir as opções
             menuConta(conta, false);
             break;
     }
 
+    // Volta para o menu da conta após concluir a ação anterior
     menuConta(conta);
 }
 
@@ -234,16 +261,18 @@ void Menu::menuConta_depositar(ContaBancaria* conta) {
 
     std::cout << "=====[ DEPOSITAR ]=====\n\n";
 
-    // Repete a coleta do valor enquanto ele não for > 0
+    // Repete a coleta do valor enquanto ele não for > 0, ou cancela a operação
+    // se for 0
     do {
         std::cout << "Digite o valor a ser depositado (R$) (0 = cancelar): ";
         std::cin >> valor;
         if (valor < 0) std::cout << "Escolha um valor maior que 0.\n\n";
         if (valor == 0) return;
-    } while (valor <= 0);
+    } while (valor < 0);
 
     std::cout << "\n";
 
+    // Faz o depósito
     conta->depositar(valor);
 
     std::cout << "\n\n";
@@ -254,16 +283,18 @@ void Menu::menuConta_sacar(ContaBancaria* conta) {
 
     std::cout << "=====[ SACAR ]=====\n\n";
 
-    // Repete a coleta do valor enquanto ele não for > 0
+    // Repete a coleta do valor enquanto ele não for > 0, ou cancela a operação
+    // se for 0
     do {
         std::cout << "Digite o valor do saque (R$) (0 = cancelar): ";
         std::cin >> valor;
         if (valor == 0) return;
         if (valor < 0) std::cout << "Escolha um valor maior que 0.\n\n";
-    } while (valor <= 0);
+    } while (valor < 0);
 
     std::cout << "\n";
 
+    // Faz o saque
     conta->sacar(valor);
 
     std::cout << "\n\n";
@@ -276,6 +307,8 @@ void Menu::menuConta_transferir(ContaBancaria* conta) {
 
     std::cout << "=====[ TRANSFERIR ]=====\n\n";
 
+    // Repete a coleta do número enquanto não for encontrada ou for a própria
+    // conta atual, ou cancela a operação se for 0
     do {
         std::cout << "Digite o número da conta de destino (0 = cancelar): ";
         std::cin >> numero;
@@ -286,6 +319,7 @@ void Menu::menuConta_transferir(ContaBancaria* conta) {
             std::cout << "A conta não existe. Verifique o número e tente "
                          "novamente\n\n";
 
+        // Se origem = destino, destino se torna NULL
         if (contaDestino == conta) {
             std::cout << "Não é possível transferir para si mesmo. Escolha "
                          "outra conta.\n\n";
@@ -294,21 +328,25 @@ void Menu::menuConta_transferir(ContaBancaria* conta) {
 
     } while (!contaDestino);
 
+    // Repete a coleta do valor enquanto for negativo, ou cancela a operação se
+    // for 0
     do {
         std::cout << "Digite o valor a ser transferido (0 = cancelar): ";
         std::cin >> valor;
         if (valor == 0) return;
         if (valor < 0) std::cout << "Escolha um valor maior que 0.\n\n";
-    } while (valor <= 0);
+    } while (valor < 0);
 
+    // Faz a transferência
     conta->transferir(valor, contaDestino);
 }
 
 void Menu::menuConta_relatorioIndividual(ContaBancaria* conta) {
     std::cout << "=====[ RELATÓRIO INDIVIDUAL ]=====\n\n";
-
     conta->mostrarDados();
-    std::cout << "\n====================\n\n";
 }
 
-void Menu::menuConta_retornar() { menuPrincipal(); }
+void Menu::menuConta_retornar() {
+    // Retorna ao menu principal
+    menuPrincipal();
+}

@@ -22,6 +22,7 @@ bool ContaPoupanca::sacar(double valor, bool silencioso) {
         // Faz o saque do valor solicitado, em modo silencioso ou não
         ContaBancaria::sacar(valor, silencioso);
 
+        // Sucesso
         return true;
     }
 
@@ -33,6 +34,7 @@ bool ContaPoupanca::sacar(double valor, bool silencioso) {
             << std::setprecision(2) << std::fixed << this->limite << "\n";
     }
 
+    // Falha
     return false;
 }
 

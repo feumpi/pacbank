@@ -1,12 +1,15 @@
 #include "banco.h"
 
 void Banco::inserir(ContaBancaria* conta) {
+    // Insere o ponteiro no fim do vetor
     this->contas.push_back(conta);
     std::cout << "Conta " << conta->getNumero() << " adicionada ao banco.\n";
 }
 
 void Banco::mostrarDados() {
+    // Se o vetor estiver vazio
     if (this->contas.size() == 0) std::cout << "O banco está vazio :(\n\n";
+
     // Chama a implementação de mostrarDados para todas as contas do vetor, com
     // um separador em baixo
     for (auto conta : this->contas) {

@@ -24,6 +24,8 @@ class ContaCorrente : public ContaBancaria, public Imprimivel {
     // chama ContaBancaria::sacar
     bool sacar(double valor, bool silencioso = false);
 
+    // Verifica se o depósito é possível, considerando a taxa de operação, e
+    // chama ontaBancaria::depositar
     bool depositar(double valor, bool silencioso = false);
 
     void mostrarDados();

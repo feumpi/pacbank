@@ -28,6 +28,7 @@ bool ContaCorrente::sacar(double valor, bool silencioso) {
         // Saca o valor solicitado (informa o novo saldo pós saque e taxa)
         ContaBancaria::sacar(valor, silencioso);
 
+        // Sucesso
         return true;
     }
 
@@ -39,6 +40,7 @@ bool ContaCorrente::sacar(double valor, bool silencioso) {
                   << "\n";
     }
 
+    // Falha
     return false;
 }
 
@@ -61,6 +63,7 @@ bool ContaCorrente::depositar(double valor, bool silencioso) {
         // depósito)
         ContaBancaria::depositar(valor, silencioso);
 
+        // Sucesso
         return true;
     }
 
@@ -70,6 +73,8 @@ bool ContaCorrente::depositar(double valor, bool silencioso) {
                      "valor de R$ "
                   << this->taxaDeOperacao << "\n";
     }
+
+    // Falha
     return false;
 }
 

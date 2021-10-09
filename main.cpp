@@ -9,6 +9,8 @@ rodá-lo.
 */
 
 int main() {
+    // Instancia o objeto executável, que executa operações pré-definidas em
+    // sequência
     Executavel executavel;
     return 0;
 }
