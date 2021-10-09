@@ -3,6 +3,12 @@
 ContaCorrente::ContaCorrente(int numero, double saldo, double taxaDeOperacao)
     : ContaBancaria(numero, saldo) {
     this->taxaDeOperacao = taxaDeOperacao;
+
+    std::cout << "Conta corrente (" << this->numero
+              << ") criada com saldo inicial de R$ " << std::setprecision(2)
+              << std::fixed << this->saldo
+              << " e taxa de operação no valor de R$ " << std::fixed
+              << this->taxaDeOperacao << "\n";
 }
 
 bool ContaCorrente::sacar(double valor, bool silencioso) {
@@ -68,7 +74,7 @@ bool ContaCorrente::depositar(double valor, bool silencioso) {
 }
 
 void ContaCorrente::mostrarDados() {
-    std::cout << "=====[ CONTA " << this->numero << " ]=====" << std::endl;
+    std::cout << "~~~( conta " << this->numero << " )~~~" << std::endl;
     std::cout << "Tipo: conta corrente" << std::endl;
     std::cout << "Saldo: R$ " << std::setprecision(2) << std::fixed
               << this->saldo << "\n";

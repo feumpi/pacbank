@@ -73,6 +73,10 @@ void Menu::menuPrincipal_criarConta() {
         std::cout << "\n";
     }
 
+    std::cout << "Criando uma nova conta "
+              << (tipo == TiposDeConta::Corrente ? "corrente" : "poupanca")
+              << "\n";
+
     ContaBancaria* contaExistente = NULL;
 
     // Repete a coleta do número enquanto já existir uma conta com ele
@@ -117,7 +121,7 @@ void Menu::menuPrincipal_criarConta() {
             new ContaCorrente(numero, saldoInicial, taxaDeOperacao));
     }
 
-    std::cout << "\nConta criada com sucesso!\n\n";
+    std::cout << std::endl;
 }
 
 void Menu::menuPrincipal_selecionarConta() {

@@ -3,6 +3,11 @@
 ContaPoupanca::ContaPoupanca(int numero, double saldo, double limite)
     : ContaBancaria(numero, saldo) {
     this->limite = limite;
+
+    std::cout << "Conta poupança (" << this->numero
+              << ") criada com saldo inicial de R$ " << std::setprecision(2)
+              << std::fixed << this->saldo << " e limite no valor de R$ "
+              << std::fixed << this->limite << "\n";
 }
 
 bool ContaPoupanca::sacar(double valor, bool silencioso) {
@@ -32,7 +37,7 @@ bool ContaPoupanca::sacar(double valor, bool silencioso) {
 }
 
 void ContaPoupanca::mostrarDados() {
-    std::cout << "=====[ CONTA " << this->numero << " ]=====" << std::endl;
+    std::cout << "~~~( conta " << this->numero << " )~~~" << std::endl;
     std::cout << "Tipo: conta poupança" << std::endl;
     std::cout << "Saldo: R$ " << std::setprecision(2) << std::fixed
               << this->saldo << std::endl;
