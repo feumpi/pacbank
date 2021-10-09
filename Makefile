@@ -29,8 +29,5 @@ menu.o: menu.cpp
 executavel.o: executavel.cpp 
 	g++ -c executavel.cpp
 
-target: dependencies
-	action
-
 clean:
 	rm *.o interativo executavel

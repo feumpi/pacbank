@@ -6,6 +6,7 @@ void Banco::inserir(ContaBancaria* conta) {
 }
 
 void Banco::mostrarDados() {
+    if (this->contas.size() == 0) std::cout << "O banco está vazio :(\n\n";
     // Chama a implementação de mostrarDados para todas as contas do vetor, com
     // um separador em baixo
     for (auto conta : this->contas) {
@@ -30,6 +31,8 @@ void Banco::remover(ContaBancaria* conta) {
     if (posicao != this->contas.end()) {
         // Apaga a posição encontrada do vetor
         this->contas.erase(posicao);
+
+        std::cout << "Conta " << conta->getNumero() << " removida do banco.\n";
 
         // Depois de remover o ponteiro do vetor, remove também a conta da heap
         delete conta;
