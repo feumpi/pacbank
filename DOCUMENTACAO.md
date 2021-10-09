@@ -94,6 +94,8 @@ Tendo uma opção válida, a função correspondene, por exemplo `Menu::menuPrin
 
 Ao final, `Menu::menuPrincipal` é chamado novamente para aguardar a pŕoxima ação do usuário, até que ele decida sair.
 
+Em todos os momentos que o menu recebe entrada (no caso deste programa, sempre numérica), o método `bool Menu::limparEntrada` verifica se houveram erros na leitura (por exemplo, ao receber um char ou texto em vez do número) usando `std::cin::good`, limpa o buffer jogando a entrada inválida para uma `std::string` temporária e resetando os erros com `std::cin::clear`. Com o retorno `true` para indicar que a entrada precisou ser limpa, um valor inválido é atribuido para a entrada forçando a repetição.
+
 ### Finalização do programa
 
 Quando o usuário decide sair (selecionando a última opção do menu principal), o destrutor `Banco::~Banco` é chamado manualmente para limpar a memória e o programa encerrado usando `exit(1)`.
