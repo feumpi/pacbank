@@ -1,6 +1,10 @@
 #ifndef EXECUTAVEL_H
 #define EXECUTAVEL_H
 
+#include "contacorrente.h"
+#include "contapoupanca.h"
+#include "relatorio.h"
+
 /*
 Crie uma classe Executavel na qual você instancia duas contas (uma de cada
 tipo), credita algum valor para elas e efetua um saque (obs: no objeto conta
