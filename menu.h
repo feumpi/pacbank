@@ -70,6 +70,10 @@ class Menu {
     void menuConta_relatorioIndividual(ContaBancaria* conta);
     void menuConta_retornar();
 
+    // Remove a entrada inválida do fluxo se necessário e retorna se foi limpa
+    // ou não
+    bool limparEntrada();
+
    protected:
     Banco pacbank;
 };

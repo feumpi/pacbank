@@ -7,7 +7,7 @@ Menu::Menu() {
     std::cout << "Bem-vindo ao Pacbank!"
               << "\n\n\n";
 
-    menuPrincipal();
+    this->menuPrincipal();
 }
 
 void Menu::menuPrincipal(bool exibirOpcoes) {
@@ -26,44 +26,48 @@ void Menu::menuPrincipal(bool exibirOpcoes) {
 
     std::cout << "Digite uma opção: ";
     std::cin >> opcao;
+
+    // Se a entrada foi inválida, considera uma opção inválida
+    if (this->limparEntrada()) opcao = 0;
+
     std::cout << "\n\n";
 
     switch (opcao) {
         case MenuPrincipal::CriarConta:
-            menuPrincipal_criarConta();
+            this->menuPrincipal_criarConta();
             break;
 
         case MenuPrincipal::SelecionarConta:
-            menuPrincipal_selecionarConta();
+            this->menuPrincipal_selecionarConta();
             break;
 
         case MenuPrincipal::RemoverConta:
-            menuPrincipal_removerConta();
+            this->menuPrincipal_removerConta();
             break;
 
         case MenuPrincipal::RelatorioGeral:
-            menuPrincipal_relatorioGeral();
+            this->menuPrincipal_relatorioGeral();
             break;
 
         case MenuPrincipal::Finalizar:
-            menuPrincipal_finalizar();
+            this->menuPrincipal_finalizar();
             break;
 
         default:
             std::cout << "Opção inválida. Tente novamente.\n\n";
             // Volta ao menu sem reimprimir as opções
-            menuPrincipal(false);
+            this->menuPrincipal(false);
             break;
     }
 
     // Volta ao menu depois de concluir a operação anterior
-    menuPrincipal();
+    this->menuPrincipal();
 }
 
 void Menu::menuPrincipal_criarConta() {
     std::cout << "=====[ CRIAR CONTA ]=====\n\n";
 
-    int tipo = 0, numero;
+    int tipo = 0, numero = -1;
     double saldoInicial = -1, taxaDeOperacao = -1, limite = -1;
     ContaBancaria* contaExistente;
 
@@ -76,6 +80,8 @@ void Menu::menuPrincipal_criarConta() {
 
         std::cout << "Digite uma opção (0 = cancelar): ";
         std::cin >> tipo;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) tipo = -1;
         std::cout << "\n";
 
         if (tipo == 0) return;
@@ -91,6 +97,8 @@ void Menu::menuPrincipal_criarConta() {
     do {
         std::cout << "Número da conta (0 = cancelar): ";
         std::cin >> numero;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) numero = -1;
         if (numero == 0) return;
         contaExistente = this->pacbank.procurarConta(numero);
 
@@ -106,6 +114,8 @@ void Menu::menuPrincipal_criarConta() {
     do {
         std::cout << "Saldo inicial (R$): ";
         std::cin >> saldoInicial;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) saldoInicial = -1;
         if (saldoInicial < 0)
             std::cout << "Escolha um valor maior ou igual a 0\n\n";
     } while (saldoInicial < 0);
@@ -116,6 +126,8 @@ void Menu::menuPrincipal_criarConta() {
         do {
             std::cout << "Limite (R$): ";
             std::cin >> limite;
+            // Se a entrada foi inválida, considera uma opção inválida
+            if (this->limparEntrada()) limite = -1;
             if (limite < 0)
                 std::cout << "Escolha um valor maior ou igual a 0\n\n";
         } while (limite < 0);
@@ -131,6 +143,8 @@ void Menu::menuPrincipal_criarConta() {
         do {
             std::cout << "Taxa de operação (R$): ";
             std::cin >> taxaDeOperacao;
+            // Se a entrada foi inválida, considera uma opção inválida
+            if (this->limparEntrada()) taxaDeOperacao = -1;
             if (taxaDeOperacao < 0)
                 std::cout << "Escolha um valor maior ou igual a 0\n\n";
         } while (taxaDeOperacao < 0);
@@ -145,8 +159,8 @@ void Menu::menuPrincipal_criarConta() {
 }
 
 void Menu::menuPrincipal_selecionarConta() {
-    int numero;
-    ContaBancaria* conta;
+    int numero = -1;
+    ContaBancaria* conta = NULL;
 
     std::cout << "=====[ SELECIONAR CONTA ]=====\n\n";
 
@@ -155,6 +169,8 @@ void Menu::menuPrincipal_selecionarConta() {
     do {
         std::cout << "Digite o número da conta desejada (0 = cancelar): ";
         std::cin >> numero;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) numero = -1;
         if (numero == 0) return;
         conta = this->pacbank.procurarConta(numero);
 
@@ -166,12 +182,12 @@ void Menu::menuPrincipal_selecionarConta() {
     std::cout << "\n\n";
 
     // Continua para o menu da conta quando encontrada
-    menuConta(conta);
+    this->menuConta(conta);
 }
 
 void Menu::menuPrincipal_removerConta() {
-    int numero;
-    ContaBancaria* conta;
+    int numero = -1;
+    ContaBancaria* conta = NULL;
 
     std::cout << "=====[ REMOVER CONTA ]=====\n\n";
 
@@ -180,6 +196,8 @@ void Menu::menuPrincipal_removerConta() {
     do {
         std::cout << "Digite o número da conta a ser removida (0 = cancelar): ";
         std::cin >> numero;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) numero = -1;
         if (numero == 0) return;
         conta = this->pacbank.procurarConta(numero);
         if (!conta)
@@ -206,11 +224,12 @@ void Menu::menuPrincipal_finalizar() {
 }
 
 void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
-    int opcao;
-    std::cout << "=====[ MENU DA CONTA ]=====\n";
-    std::cout << "Conta selecionada: " << conta->getNumero() << "\n\n";
+    int opcao = 0;
 
     if (exibirOpcoes) {
+        std::cout << "=====[ MENU DA CONTA ]=====\n";
+        std::cout << "Conta selecionada: " << conta->getNumero() << "\n\n";
+
         std::cout << "Opções:\n";
         std::cout << "1. Depositar\n";
         std::cout << "2. Sacar\n";
@@ -221,43 +240,47 @@ void Menu::menuConta(ContaBancaria* conta, bool exibirOpcoes) {
 
     std::cout << "Digite uma opção: ";
     std::cin >> opcao;
+
+    // Se a entrada foi inválida, considera uma opção inválida
+    if (this->limparEntrada()) opcao = 0;
+
     std::cout << "\n\n";
 
     switch (opcao) {
         case MenuConta::Depositar:
-            menuConta_depositar(conta);
+            this->menuConta_depositar(conta);
             break;
 
         case MenuConta::Sacar:
-            menuConta_sacar(conta);
+            this->menuConta_sacar(conta);
             break;
 
         case MenuConta::Transferir:
-            menuConta_transferir(conta);
+            this->menuConta_transferir(conta);
             break;
 
         case MenuConta::RelatorioIndividual:
-            menuConta_relatorioIndividual(conta);
+            this->menuConta_relatorioIndividual(conta);
             break;
 
         case MenuConta::Retornar:
-            menuConta_retornar();
+            this->menuConta_retornar();
             break;
 
         default:
             std::cout << "\nOpção inválida. Tente novamente.\n\n";
 
             // Volta para o menu da conta sem reexibir as opções
-            menuConta(conta, false);
+            this->menuConta(conta, false);
             break;
     }
 
     // Volta para o menu da conta após concluir a ação anterior
-    menuConta(conta);
+    this->menuConta(conta);
 }
 
 void Menu::menuConta_depositar(ContaBancaria* conta) {
-    double valor;
+    double valor = -1;
 
     std::cout << "=====[ DEPOSITAR ]=====\n\n";
 
@@ -266,6 +289,8 @@ void Menu::menuConta_depositar(ContaBancaria* conta) {
     do {
         std::cout << "Digite o valor a ser depositado (R$) (0 = cancelar): ";
         std::cin >> valor;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) valor = -1;
         if (valor < 0) std::cout << "Escolha um valor maior que 0.\n\n";
         if (valor == 0) return;
     } while (valor < 0);
@@ -279,7 +304,7 @@ void Menu::menuConta_depositar(ContaBancaria* conta) {
 }
 
 void Menu::menuConta_sacar(ContaBancaria* conta) {
-    double valor;
+    double valor = -1;
 
     std::cout << "=====[ SACAR ]=====\n\n";
 
@@ -288,6 +313,8 @@ void Menu::menuConta_sacar(ContaBancaria* conta) {
     do {
         std::cout << "Digite o valor do saque (R$) (0 = cancelar): ";
         std::cin >> valor;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) valor = -1;
         if (valor == 0) return;
         if (valor < 0) std::cout << "Escolha um valor maior que 0.\n\n";
     } while (valor < 0);
@@ -301,8 +328,8 @@ void Menu::menuConta_sacar(ContaBancaria* conta) {
 }
 
 void Menu::menuConta_transferir(ContaBancaria* conta) {
-    int numero;
-    double valor;
+    int numero = -1;
+    double valor = -1;
     ContaBancaria* contaDestino = NULL;
 
     std::cout << "=====[ TRANSFERIR ]=====\n\n";
@@ -312,6 +339,8 @@ void Menu::menuConta_transferir(ContaBancaria* conta) {
     do {
         std::cout << "Digite o número da conta de destino (0 = cancelar): ";
         std::cin >> numero;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) numero = -1;
         contaDestino = this->pacbank.procurarConta(numero);
         if (numero == 0) return;
 
@@ -333,6 +362,8 @@ void Menu::menuConta_transferir(ContaBancaria* conta) {
     do {
         std::cout << "Digite o valor a ser transferido (0 = cancelar): ";
         std::cin >> valor;
+        // Se a entrada foi inválida, considera uma opção inválida
+        if (this->limparEntrada()) valor = -1;
         if (valor == 0) return;
         if (valor < 0) std::cout << "Escolha um valor maior que 0.\n\n";
     } while (valor < 0);
@@ -348,5 +379,19 @@ void Menu::menuConta_relatorioIndividual(ContaBancaria* conta) {
 
 void Menu::menuConta_retornar() {
     // Retorna ao menu principal
-    menuPrincipal();
+    this->menuPrincipal();
+}
+
+bool Menu::limparEntrada() {
+    // Se houverem erros no cin, limpa e retorna true
+    if (!std::cin.good()) {
+        std::cin.clear();
+        std::string temp;
+        std::cin >> temp;
+
+        return true;
+    }
+
+    // Sem erros, retorna false
+    return false;
 }
