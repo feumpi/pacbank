@@ -20,13 +20,17 @@ Em modo não interativo, o programa executa criando algumas contas e executando 
 
 O programa foi testado e funcionou como esperado primariamente em ambiente Linux `5.14.10-1-MANJARO` e compilado com `gcc 11.1.0`.
 
+Em Windows 21H1, com `gcc/MinGW-W64 11.2.0` e `GNU Make 4.3` provenientes dos pacotes `mingw` e `make` do Chocolatey, respectivamente, pareceu funcionar como esperado, com exceção dos acentos impressos no terminal.
+
+Linux é recomendado. 🐧
+
 # Como utilizar este programa
 
 ## Compilar
 
 Este programa conta com um _Makefile_ para facilitar a sua vida! (eu ouvi um ponto extra?)
 
-Use o comando **make** para compilar automaticamente todo o código-fonte e gerar os executáveis `interativo` e `executavel`:
+No Linux, use o comando **make** para compilar automaticamente todo o código-fonte e gerar os executáveis `interativo` e `executavel`:
 
 ```
 > make
@@ -46,6 +50,26 @@ g++ banco.o contabancaria.o contacorrente.o contapoupanca.o executavel.o main.o 
 
 _Ou execute os comandos do output manualmente, se necessário_
 
+No Windows, especifique o arquivo **Makefile.win**, que criará os executaveis **interativo.exe** e **executavel.exe**:
+
+```
+> make -f Makefile.win
+
+g++ -c banco.cpp
+g++ -c contabancaria.cpp
+g++ -c contacorrente.cpp
+g++ -c contapoupanca.cpp
+g++ -c executavel.cpp
+g++ -c main.cpp
+g++ -c main2.cpp
+g++ -c menu.cpp
+g++ -c relatorio.cpp
+g++ -static banco.o contabancaria.o contacorrente.o contapoupanca.o main2.o menu.o -o interativo.exe
+g++ -static banco.o contabancaria.o contacorrente.o contapoupanca.o executavel.o main.o relatorio.o -o executavel.exe
+```
+
+_Ou execute os comandos do output manualmente, se necessário. Observe que a flag `-static` é necessária no Windows para que ele encontre as bibliotecas do C++ do MinGW._
+
 ## Executar
 
 Em modo interativo:
@@ -54,10 +78,18 @@ Em modo interativo:
 ./interativo
 ```
 
+```
+interativo.exe
+```
+
 Em modo executável:
 
 ```
 ./executavel
+```
+
+```
+executavel.exe
 ```
 
 ### Modo executavel
